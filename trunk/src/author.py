@@ -24,33 +24,44 @@ class MalformedAuthorName(Exception):
 
 class Author():
     def __init__(self, name_str):
-        name_str = re.sub(r'[()\'"?~*!@#$\%^&]', '', name_str)
+        self.original_name = name_str
+        self.merged_name = name_str #this gets overwritten
+
+    def __str__(self):
+        return self.original_name
+
+    def clean_name(self):
+        name_str = re.sub(r'[()\'"?~*!@#$\%^&]', '', self.original_name)
         name_str = re.sub(r'\s+', ' ', name_str)
         name_str = re.sub(r' -|- ', ' ', name_str)
         name_str = re.sub(r'^ | $', '', name_str)
-        m = re.match('(.+)\s+(.+)', name_str)
-        if not m:
-            msg = "Cannot split '%s' into first and last names" % name_str
-            raise MalformedAuthorName(msg)
-        self.first_name = m.group(1)
-        self.last_name = m.group(2)
+        name_str = re.sub(r'(Dr|Mr|Mrs|Ms). ', '', name_str)
+        return name_str
 
-    def full_name(self):
-        return "%s %s" % (self.first_name, self.last_name)
+    def split_first_last(self):
+        cname = self.clean_name()
+        m_comma = re.match('(.+), (.+)', cname)
+        if m_comma:
+            return m_comma.group(2), m_comma.group(1)
 
-    def __str__(self):
-        return self.full_name()
+        m = re.match('(.+)\s+(.+)', cname)
+        if m:
+            return m.group(1), m.group(2)
+
+        msg = "Cannot split '%s' into first and last names" % self
+        raise MalformedAuthorName(msg)
 
     def clean_first_names(self):
-        name = re.sub(r'(Dr|Mr|Mrs|Ms). ', '', self.first_name)
-        name_parts = re.split(r'[ -]+', name)
+        first_name, last_name = self.split_first_last()
+        name_parts = re.split(r'[ -]+', first_name)
         name_parts = [n for n in name_parts if n]
         if name_parts:
             name_parts[0] = nick_names.get(name_parts[0], name_parts[0])
         return name_parts
 
     def token(self):
-        t = "%s_%s" % (self.last_name, self.first_name[0])
+        first_name, last_name = self.split_first_last()
+        t = "%s_%s" % (last_name, first_name[0])
         t = re.sub(r'\W', '', t)
         if len(t) < 3:
             msg = "Cannot create token for '%s'." % self

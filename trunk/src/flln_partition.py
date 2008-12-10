@@ -141,9 +141,8 @@ class FllnPartition():
         for i in range(num_iters):
             self.merge_iter(self.target_sole_stricter)
 
-    def store(self, out_handle):
         for part in self.parts:
             merged_name = part.full_name()
             for a in part.iter_authors():
-                out_handle.write("%s\t%s\n" % (a, merged_name))
+                a.merged_name = merged_name
 
