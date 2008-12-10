@@ -1,0 +1,37 @@
+Copyright 2008, Jeffrey Regier
+
+------------------------------------------------------------------------------
+
+Author-Dedupe is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Author-Dedupe is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with Author-Dedupe.  If not, see <http://www.gnu.org/licenses/>.
+
+------------------------------------------------------------------------------
+
+Slight variations in the spellings of people's names make it difficult to tell
+which names refer to the same person. This problem is particularly striking 
+when processing large sets of author names.
+
+Author-Dedupe is Python software for merging author names which refer to the
+same person. Simple string matching via regular expressions is used, but that's
+just the start. Author-Dedupe iteratively partitions the authors' names, with
+each successive iteration further refining the partition of author names. The
+algorithm is detailed on the project web site.
+
+Input is read from a file containing one author name per line. For each line of
+input, one line containing the corrected name is written to the output file.
+Sample input and output files may be found in the 'sample' subdirectory. The
+main executable is found at 'src/author-dedupe.py'. It takes two arguments:
+an input file and an output file.
+
+If you have questions or comments, or you're interested in contributing code to
+this project, please contact jeff [at] stat [dot] berkeley [dot] edu.
