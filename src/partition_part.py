@@ -23,6 +23,9 @@ class PartitionPart():
     def add(self, a):
         self.authors.append(a)
 
+    def extend(self, source_part):
+        self.authors.extend(source_part.iter_authors())
+
     # The strictest (i.e. least-compatible) author comes first
     # in the author list, by virtue of the order in which authors are
     # added to it.
@@ -36,12 +39,6 @@ class PartitionPart():
     def fingerprint_id(self):
         return self.authors[0].numpy_id #hack
 
-    def extend(self, source_part):
-        self.authors.extend(source_part.iter_authors())
-
-    def last_name(self):
-        return self.authors[0].last_name
-
     def first_name(self):
         max_name = ""
         for a in self.authors:
@@ -50,12 +47,13 @@ class PartitionPart():
                 max_name = cur_name
         return max_name
 
+    def last_name(self):
+        first_name, last_name = self.authors[0].split_first_last()
+        return last_name
+
     def full_name(self):
         return "%s %s" % (self.first_name(), self.last_name())
 
     def iter_authors(self):
         return self.authors
-
-    def all_names(self):
-        return [a.full_name() for a in self.iter_authors()]
 
