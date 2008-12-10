@@ -45,6 +45,7 @@ nick_names = {
     "Jeff": "Jeffrey",
     "Larry": "Lawrence",
     "Leo": "Leonard",
+    "Matt": "Matthew",
     "Nate": "Nathan",
     "Nat": "Nathan",
     "Nick": "Nicholas",
