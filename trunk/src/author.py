@@ -36,7 +36,7 @@ class Author():
         name_str = re.sub(r' -|- ', ' ', name_str)
         name_str = re.sub(r'^ | $', '', name_str)
         name_str = re.sub(r'(Dr|Mr|Mrs|Ms). ', '', name_str)
-        return name_str
+        return name_str.title()
 
     def split_first_last(self):
         cname = self.clean_name()
