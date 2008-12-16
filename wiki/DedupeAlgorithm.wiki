@@ -9,7 +9,7 @@ The name strings are partitioned such that two name strings are placed in the sa
 3.
 Consider name strings to be composed of words and initials, with spaces and hyphens and periods acting as delimiters. Words have strictly more than one character and may not end with a period, whereas initials contain only one character and typically are followed by a period.
 
-Let "pieces" refer to the words and initials of a name string. If two pieces are both words or both initials, then they are compatible if and only if they are the same. If one piece is a word while the other an initial, then they are compatible if and only if the first letter of the word is the same as the initial.
+Let "pieces" refer to the words and initials of a name string. If two pieces are both words or both initials, then they are compatible if and only if they are the same (i.e. character equivalent). If one piece is a word while the other an initial, then they are compatible if and only if the first letter of the word is the same as the initial.
 
 Two name strings are said to be compatible iff the sequences of their pieces are compatible. Two sequences of pieces of different lengths are compatible iff the shorter sequence is compatible with some subsequence of the longer sequence. Two sequences of pieces of the same length are compatible iff their corresponding pieces are all compatible.
 
