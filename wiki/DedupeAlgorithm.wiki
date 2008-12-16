@@ -20,7 +20,7 @@ Use the "is equivalent" operation to induce a further partition on each partitio
 4.
 Name string _a_ is said to be stricter than name string _b_ iff for any name string _c_ (again, found in the same partition part from step 2 as _a_ and _b_), if _a_ is compatible with _c_, then _b_ is compatible with _c_.
 
-Merge any two partition parts (from step 3) p1 and p2 if each name string in p2 is stricter than each name string in p1, and p2 is the only partition for which this holds.
+Merge any two partition parts (from step 3) p1 and p2 if each name string in p2 is stricter than each name string in p1, and _p2 is the only partition for which this holds_.
 
 5.
 Repeat step 4 a few times, or until executing step 4 does not modify the partition.
