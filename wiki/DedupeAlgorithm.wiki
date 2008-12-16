@@ -23,4 +23,4 @@ Name string _a_ is said to be stricter than name string _b_ iff for any name str
 Merge any two partition parts (from step 3) p1 and p2 if each name string in p2 is stricter than each name string in p1, and _p2 is the only partition for which this holds_.
 
 5.
-Repeat step 4 a few times, or until executing step 4 does not modify the partition.
+Repeat step 4 a few times, or until executing step 4 does not alert the partition.
