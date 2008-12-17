@@ -4,7 +4,7 @@ Name strings are stripped of titles (e.g. Mr., Dr.), special characters are remo
 A first name and a last name are extracted from each name string. In general, the characters appearing after the last space are said to be the last name, and the characters appearing before the last space (which may include middle initials and spaces) can be referred to as the first name. However, if the name string contains a comma, the last name appears before the comma and the first name after.
 
 === 2. Top Level Partitioning ===
-Form partition _P_ by assigning two name strings to the same part iff they share a last name are the first character of their first names. No further effort is made to merge names strings placed in separate parts of _P_. This ensures the computation remains tractable, since the remaining steps run in O(n^2^) time, or in O(n^3^) time if caching is not used.
+Form partition _P_ by assigning two name strings to the same part iff they share a last name and they share the first character of their first names. No further effort is made to merge names strings placed in separate parts of _P_. This ensures the computation remains tractable, since the remaining steps run in O(n^2^) time, or in O(n^3^) time if caching is not used.
 
 Steps 3 - 5 are executed once for each of these partition part.
 
