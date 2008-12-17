@@ -9,7 +9,7 @@ Form partition _P_ by assigning two name strings to the same part iff they share
 Steps 3 - 5 are executed once for each of _P_'s parts.
 
 === 3. Merging Equivalent Names ===
-Consider name strings to be composed of words and initials, with spaces, hyphens and periods acting as delimiters. Let words have strictly more than one character, whereas let initials contain only one character. Only initials may be followed by periods.
+Consider name strings to be composed of words and initials, with spaces, hyphens and periods acting as delimiters. Words have strictly more than one character, whereas initials contain only one character. Only initials may be followed by periods.
 
 Let "pieces" refer to the words and initials of a name string. If two pieces are both words or both initials, then they are compatible if and only if they are the same (i.e. character equivalent). If one piece is a word while the other an initial, then they are compatible if and only if the first letter of the word is the same as the initial.
 
@@ -20,7 +20,7 @@ Two name strings, _a_ and _b_, are equivalent iff for any other name string _c_ 
 Apply this notion of equivalence to induce a partition _Q_ on each part of partition _P_.
 
 === 4. Merging Partitions ===
-Name string _a_ is said to be stricter than name string _b_ iff for any name string _c_ (again, found in the same part of _P_ as _a_ and _b_), if _a_ is compatible with _c_, then _b_ is compatible with _c_.
+Name string _a_ is said to be stricter than name string _b_ iff for any name string _c_  if _a_ and _c_ are compatible, then _b_ and _c_  are compatible.
 
 Merge any two parts of _Q_, _q1_ and _q2_, if each name string in _q2_ is stricter than each name string in _q1_, and _q2 is the only partition for which this holds_.
 
