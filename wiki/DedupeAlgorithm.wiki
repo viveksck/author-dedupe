@@ -4,7 +4,7 @@ Name strings are stripped of titles (e.g. Mr., Dr.), special characters are remo
 A first name and a last name are extracted from each name string. In general, the characters appearing after the last space are said to be the last name, and the characters appearing before the last space (which may include middle initials and spaces) can be referred to as the first name. However, if the name string contains a comma, the last name appears before the comma and the first name after.
 
 2.
-The name strings are partitioned such that two name strings are placed in the same part if and only if they share a last name and the first character of their first names. No further effort is made to merge names strings placed in separate parts of this partition. Steps 3 - 5 are executed once for each of these partition part.
+Form partition _P_ by assigning two name strings to the same part iff they share a last name are the first character of their first names. No further effort is made to merge names strings placed in separate parts of _P_. Steps 3 - 5 are executed once for each of these partition part.
 
 3.
 Consider name strings to be composed of words and initials, with spaces and hyphens and periods acting as delimiters. Words have strictly more than one character and may not end with a period, whereas initials contain only one character and typically are followed by a period.
@@ -13,14 +13,14 @@ Let "pieces" refer to the words and initials of a name string. If two pieces are
 
 Two name strings are said to be compatible iff the sequences of their pieces are compatible. Two sequences of pieces of different lengths are compatible iff the shorter sequence is compatible with some subsequence of the longer sequence. Two sequences of pieces of the same length are compatible iff their corresponding pieces are all compatible.
 
-Two name strings, _a_ and _b_, are equivalent iff for any other name string _c_ (found in the same partition part, as formed at step 2), _a_ is compatible with _c_ iff _b_ is compatible with _c_.
+Two name strings, _a_ and _b_, are equivalent iff for any other name string _c_ (found in the same part of partition _P_), _a_ is compatible with _c_ iff _b_ is compatible with _c_.
 
-Use the "is equivalent" operation to induce a further partition on each partition part from step 2.
+Apply the "is equivalent" operation to induce a partition _Q_ on each part of partition _P_.
 
 4.
-Name string _a_ is said to be stricter than name string _b_ iff for any name string _c_ (again, found in the same partition part from step 2 as _a_ and _b_), if _a_ is compatible with _c_, then _b_ is compatible with _c_.
+Name string _a_ is said to be stricter than name string _b_ iff for any name string _c_ (again, found in the same part of _P_ as _a_ and _b_), if _a_ is compatible with _c_, then _b_ is compatible with _c_.
 
-Merge any two partition parts (from step 3) p1 and p2 if each name string in p2 is stricter than each name string in p1, and _p2 is the only partition for which this holds_.
+Merge any two parts of _Q_, _q1_ and _q2_, if each name string in _q2_ is stricter than each name string in _q1_, and *_q2_ is the only partition for which this holds*.
 
 5.
 Repeat step 4 a few times, or until executing step 4 does not alert the partition.
