@@ -1,5 +1,5 @@
 === 1. Cleaning and Parsing ===
-Name strings are stripped of titles (e.g. Mr., Dr.), special characters are removed, spacing and capitalization is standardized, etc. 
+Name strings are stripped of titles (e.g. Mr., Dr.), special characters are removed, spacing and capitalization is standardized, common nick names are replaced with full names, etc. 
 
 A first name and a last name are extracted from each name string. In general, the characters appearing after the last space are said to be the last name, and the characters appearing before the last space (which may include middle initials and spaces) can be referred to as the first name. However, if the name string contains a comma, the last name appears before the comma and the first name after.
 
