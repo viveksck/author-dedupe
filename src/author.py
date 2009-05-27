@@ -36,6 +36,8 @@ class Author():
         name_str = re.sub(r' -|- ', ' ', name_str)
         name_str = re.sub(r'^ | $', '', name_str)
         name_str = re.sub(r'(Dr|Mr|Mrs|Ms). ', '', name_str)
+        name_str = re.sub('^([A-Z])([A-Z]) ', r'\1. \2. ', name_str)
+        name_str = re.sub('^([A-Z][a-z]+)\. ', r'\1 ', name_str)
         return name_str.title()
 
     def split_first_last(self):

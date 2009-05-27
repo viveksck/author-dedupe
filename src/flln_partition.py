@@ -30,11 +30,12 @@ def compatible_names(a1, a2):
         return compatible_names(a2, a1)
 
     def comp_name(w1, w2):
-        if len(w1) == 1 or (len(w1) == 2 and w1[1] == ".") \
-            or len(w2) == 1 or (len(w2) == 2 and w2[1] == "."):
-            return w1 and w2 and w1[0] == w2[0]
-        else:
-            return w1 == w2
+        w1 = re.sub(r'\W', '', w1)
+        w2 = re.sub(r'\W', '', w2)
+        l = min(len(w1), len(w2))
+        if not l:
+            return False
+        return w1[:l] == w2[:l]
  
     # the front first names must be compatible
     if not comp_name(short[0], long[0]):
@@ -54,7 +55,7 @@ def compatible_names(a1, a2):
 
  
 class FllnPartition():
-    """first-letter first-name last-letter last-name partition
+    """(first-letter-first-name, last-name) partition
     """
 
     def __init__(self, authors):
