@@ -18,42 +18,54 @@
 
 class PartitionPart():
     def __init__(self):
-        self.authors = []
+        self.authors = set()
+
+    def __str__(self):
+        return self.full_name()
+
+    def __iter__(self):
+        return self.authors.__iter__()
 
     def add(self, a):
-        self.authors.append(a)
+        self.authors.add(a)
 
     def extend(self, source_part):
-        self.authors.extend(source_part.iter_authors())
-
-    # The strictest (i.e. least-compatible) author comes first
-    # in the author list, by virtue of the order in which authors are
-    # added to it.
-    #
-    # TODO: Replace this authors list with an unordered set,
-    # and don't rely on the order in which authors are added
-    # to determine which author is the least-compatible. Instead
-    # keep running store of the strictest author, and let
-    # this authors "compatiblity fingerprint" server as the
-    # fingerprint of the entire partition
-    def fingerprint_id(self):
-        return self.authors[0].numpy_id #hack
+        self.authors.update(source_part.authors)
 
     def first_name(self):
-        max_name = ""
-        for a in self.authors:
-            cur_name = " ".join(a.clean_first_names())
-            if len(cur_name) > len(max_name):
-                max_name = cur_name
-        return max_name
+        return max([a.first_name for a in self.authors], key=len)
+
+    def middle_names(self):
+        return max([a.middle_names for a in self.authors], key=len)
 
     def last_name(self):
-        first_name, last_name = self.authors[0].split_first_last()
-        return last_name
+        #any author will do
+        return min(self.authors).last_name
+
+    def reverse_token(self):
+        return "%s_%s" % (self.first_name(), self.last_name()[0])
+
+    def var_last(self):
+        #any author will do
+        return min(self.authors).var_last()
+
+    def token(self):
+        #any author will do
+        return min(self.authors).token()
 
     def full_name(self):
-        return "%s %s" % (self.first_name(), self.last_name())
+        middle_name = " ".join(self.middle_names())
+        if middle_name:
+            middle_name += ' '
+        return "%s %s%s" % (self.first_name(), middle_name, self.last_name())
 
-    def iter_authors(self):
-        return self.authors
+    def change_last_name(self, new_last):
+        for a in self.authors:
+            a.last_name = new_last
 
+    def drop_first_name(self):
+        new_first_name = self.middle_names()[0]
+        new_middle_names = self.middle_names()[1:]
+        for a in self.authors:
+            a.first_name = new_first_name
+            a.middle_names = new_middle_names
